@@ -40,7 +40,7 @@ func memorySteps(steps []byte) {
 			Bigbytemachine.pointer++
 			continue
 		}
-		if Bigbytemachine.memory[Bigbytemachine.pointer] == 0xf7 { //Subtraction feature
+		if Bigbytemachine.memory[Bigbytemachine.pointer] == 0xf7 { //Division feature
 			stack := Bigbytemachine.stack
 			dividedStack := stack[len(stack)-2] / stack[len(stack)-1]
 			stack = stack[:len(stack)-2]
@@ -49,7 +49,7 @@ func memorySteps(steps []byte) {
 			Bigbytemachine.pointer++
 			continue
 		}
-		if Bigbytemachine.memory[Bigbytemachine.pointer] == 0xf6 { //Subtraction feature
+		if Bigbytemachine.memory[Bigbytemachine.pointer] == 0xf6 { //Modulo feature
 			stack := Bigbytemachine.stack
 			ModuloStack := stack[len(stack)-2] % stack[len(stack)-1]
 			stack = stack[:len(stack)-2]
