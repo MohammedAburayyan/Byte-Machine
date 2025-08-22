@@ -20,6 +20,7 @@ func push(someStack []int, otherStack []int) []int {
 	return append(someStack, otherStack...)
 }
 
+
 // func store(someregister [3]int, value int, index int) [3]int {
 
 // }
@@ -91,8 +92,19 @@ func memorySteps(steps []byte) {
 			Bigbytemachine.pointer += 2
 			continue
 		}
+		if Bigbytemachine.memory[Bigbytemachine.pointer] == 0xf3 { // jump if feature
+			index := Bigbytemachine.memory[Bigbytemachine.pointer + 1]
+			value := Bigbytemachine.register[index]
+			condition := index + 1
+			if condition == value{
+				index = 0
+				Bigbytemachine.pointer = index
+			}
+			continue
+		}
 	}
 	fmt.Println("Stack: ", Bigbytemachine.stack)
+
 
 }
 func main() {
