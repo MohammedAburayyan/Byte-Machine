@@ -20,7 +20,6 @@ func push(someStack []int, otherStack []int) []int {
 	return append(someStack, otherStack...)
 }
 
-
 // func store(someregister [3]int, value int, index int) [3]int {
 
 // }
@@ -93,21 +92,24 @@ func memorySteps(steps []byte) {
 			continue
 		}
 		if Bigbytemachine.memory[Bigbytemachine.pointer] == 0xf3 { // jump if feature
-			index := Bigbytemachine.memory[Bigbytemachine.pointer + 1]
-			value := Bigbytemachine.register[index]
-			condition := index + 1
-			if condition == value{
-				index = 0
-				Bigbytemachine.pointer = index
+			valueToCompare := Bigbytemachine.memory[Bigbytemachine.pointer+1]
+			found := false
+			for _, number := range Bigbytemachine.stack {
+				if number == int(valueToCompare) {
+					Bigbytemachine.pointer += 2
+					found = true
+					break
+				}
 			}
-			continue
+			if found == false {
+				Bigbytemachine.pointer = 0
+			}
 		}
+		fmt.Println("Stack: ", Bigbytemachine.stack)
+
 	}
-	fmt.Println("Stack: ", Bigbytemachine.stack)
-
-
 }
 func main() {
-	steps := []byte{0xff, 0x01, 0xf5, 0x00, 0xf4, 0x00}
+	steps := []byte{}
 	memorySteps(steps)
 }
