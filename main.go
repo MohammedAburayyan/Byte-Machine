@@ -110,6 +110,6 @@ func memorySteps(steps []byte) {
 	}
 }
 func main() {
-	steps := []byte{}
+	steps := []byte{0xf5, 0x05} // 0xf4, 0x01, 0xff, 0x01, 0xf9, 0xf3, 0x09}
 	memorySteps(steps)
 }
